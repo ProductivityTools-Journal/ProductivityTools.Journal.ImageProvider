@@ -1,0 +1,11 @@
+steps:
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args:
+  - gcloud
+  - functions
+  - deploy
+  - HandleAsync
+  - --region=europe-west4
+  - --source=.
+  - --trigger-http
+  - --runtime=dotnet6
