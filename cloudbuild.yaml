@@ -9,3 +9,5 @@ steps:
   - --source=.
   - --trigger-http
   - --runtime=dotnet6
+options:
+  logging: CLOUD_LOGGING_ONLY
