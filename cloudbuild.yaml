@@ -6,7 +6,7 @@ steps:
   - deploy
   - HandleAsync
   - --region=europe-west1
-  - --source=.
+  - --source=.\ProductivityTools.Journal.ImageProvider
   - --trigger-http
   - --runtime=dotnet6
 options:
