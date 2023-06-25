@@ -9,6 +9,5 @@ steps:
   - --source=ProductivityTools.Journal.ImageProvider
   - --trigger-http
   - --runtime=dotnet6
-  - --entry-point HelloWorld.Function
 options:
   logging: CLOUD_LOGGING_ONLY
