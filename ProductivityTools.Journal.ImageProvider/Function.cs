@@ -24,19 +24,19 @@ namespace ProductivityTools.Journal.ImageProvider
                 //await context.Response.WriteAsync(obj.Name);
                 Console.WriteLine(obj.Name);
             }
-
+            context.Response.ContentType= "image/jpeg";
             // Download file
-            using (var stream = File.OpenWrite("Untitled.png"))
+            using (var stream = new MemoryStream())
             {
                 client.DownloadObject(bucketName, "Untitled.png", stream);
-              
+                //stream.CopyTo(context.Response.Body);
+                await context.Response.BodyWriter.WriteAsync(stream.ToArray());
             }
-            var fileInfo = new System.IO.FileInfo("Untitled.png");
-            var fileInfo2 = new Microsoft.Extensions.FileProviders.Physical.PhysicalFileInfo(fileInfo);
-            await context.Response.SendFileAsync(fileInfo2);
-
-
-            await context.Response.WriteAsync("Hello World!");
+            //var fileInfo = new System.IO.FileInfo("Untitled.png");
+            //var fileInfo2 = new Microsoft.Extensions.FileProviders.Physical.PhysicalFileInfo(fileInfo);
+            //await context.Response.SendFileAsync(fileInfo2);
+            
+           // await context.Response.WriteAsync("Hello World!");
         }
     }
 }
