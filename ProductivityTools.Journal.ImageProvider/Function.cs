@@ -13,30 +13,33 @@ namespace ProductivityTools.Journal.ImageProvider
         const string ProjectId = "ptjournal-b53b0";
         public async Task HandleAsync(HttpContext context)
         {
+            var fileNameExists = context.Request.Query.Keys.Contains("fileName");
+            if (fileNameExists == false)
+            {
+                throw new Exception("Please provide filename");
+            }
+            var fileName= context.Request.Query["fileName"];
+            await context.Response.WriteAsync(fileName);
+
+
+
             var client = StorageClient.Create();
-
-            // Create a bucket with a globally unique name
             var bucketName = "ptjournaltest1";
-           // var bucket = client.CreateBucket(ProjectId, bucketName);
-
             foreach (var obj in client.ListObjects(bucketName))
             {
-                //await context.Response.WriteAsync(obj.Name);
                 Console.WriteLine(obj.Name);
+                
+                await context.Response.WriteAsync(obj.Name);
             }
+            return;
             context.Response.ContentType= "image/jpeg";
-            // Download file
             using (var stream = new MemoryStream())
             {
                 client.DownloadObject(bucketName, "Untitled.png", stream);
-                //stream.CopyTo(context.Response.Body);
                 await context.Response.BodyWriter.WriteAsync(stream.ToArray());
             }
-            //var fileInfo = new System.IO.FileInfo("Untitled.png");
-            //var fileInfo2 = new Microsoft.Extensions.FileProviders.Physical.PhysicalFileInfo(fileInfo);
-            //await context.Response.SendFileAsync(fileInfo2);
+
             
-           // await context.Response.WriteAsync("Hello World!");
         }
     }
 }
