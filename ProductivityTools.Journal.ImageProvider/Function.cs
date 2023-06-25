@@ -7,8 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 
 //namespace ProductivityTools.Journal.ImageProvider
-namespace IMG
-{
+//namespace IMG
+//{
     public class Function : IHttpFunction
     {
         /// <summary>
@@ -22,4 +22,4 @@ namespace IMG
         }
     }
 
-}
+//}
