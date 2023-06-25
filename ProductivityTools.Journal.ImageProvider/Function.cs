@@ -2,7 +2,7 @@ using Google.Cloud.Functions.Framework;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace HelloWorld
+namespace ProductivityTools.Journal.ImageProvider
 {
     public class Function : IHttpFunction
     {

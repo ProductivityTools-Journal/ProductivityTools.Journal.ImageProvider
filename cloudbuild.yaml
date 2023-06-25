@@ -5,7 +5,7 @@ steps:
   - functions
   - deploy
   - CloudBuildFunction
-  - --entry-point=HelloWorld.Function
+  - --entry-point=ProductivityTools.Journal.ImageProvider.Function
   - --source=.
   - --trigger-http
   - --runtime=dotnet6
