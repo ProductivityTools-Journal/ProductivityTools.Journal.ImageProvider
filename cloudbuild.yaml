@@ -4,7 +4,7 @@ steps:
   - gcloud
   - functions
   - deploy
-  - myfunction
+  - HandleAsync
   - --region=europe-west1
   - --source=ProductivityTools.Journal.ImageProvider
   - --trigger-http
