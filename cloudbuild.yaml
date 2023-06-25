@@ -5,6 +5,7 @@ steps:
   - functions
   - deploy
   - my-first-function
+  - --source=.
   - --trigger-http
   - --runtime=dotnet6
 options:
