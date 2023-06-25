@@ -4,7 +4,7 @@ steps:
   - gcloud
   - functions
   - deploy
-  - HelloWorld.Function
+  - myfunction
   - --region=europe-west1
   - --source=ProductivityTools.Journal.ImageProvider
   - --trigger-http
