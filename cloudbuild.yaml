@@ -5,6 +5,7 @@ steps:
   - functions
   - deploy
   - CloudBuildFunction
+  - --entry-point=HelloWorld.Function
   - --source=.
   - --trigger-http
   - --runtime=dotnet6
