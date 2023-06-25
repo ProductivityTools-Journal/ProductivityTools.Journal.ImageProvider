@@ -6,7 +6,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ProductivityTools.Journal.ImageProvider
+//namespace ProductivityTools.Journal.ImageProvider
+namespace IMG
 {
     public class Function : IHttpFunction
     {
