@@ -4,7 +4,7 @@ steps:
   - gcloud
   - functions
   - deploy
-  - my-first-function
+  - Function
   - --source=.
   - --trigger-http
   - --runtime=dotnet6
