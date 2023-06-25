@@ -4,9 +4,8 @@ steps:
   - gcloud
   - functions
   - deploy
-  - HandleAsync
-  - --region=europe-west1
-  - --source=ProductivityTools.Journal.ImageProvider
+  - my-first-function
+  - --entry-point HelloWorld.Function
   - --trigger-http
   - --runtime=dotnet6
 options:
