@@ -15,7 +15,7 @@ namespace ProductivityTools.Journal.ImageProvider
         /// </summary>
         /// <param name="context">The HTTP context, containing the request and the response.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        public async Task Handle(HttpContext context)
+        public async Task HandleAsync(HttpContext context)
         {
             await context.Response.WriteAsync("Hello, Functions Framework.");
         }
