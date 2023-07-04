@@ -55,8 +55,12 @@ namespace ProductivityTools.Journal.ImageProvider
 
         public async Task HandleAsync(HttpContext context)
         {
-            var token= GetValue(context, "token", "Please provide filename");
-            string userEmail = "pwujczyk@gmail.com";//await ValidateBearer(token);
+            var cookies = context.Request.Cookies;
+            string bearer = string.Empty;
+            cookies.TryGetValue("token", out bearer);
+
+            //string userEmail = "pwujczyk@gmail.com";//
+            string userEmail=await ValidateBearer(bearer);
             string user = userEmail.Replace("@", "-").Replace(".", "-");
             var fileName = GetValue(context, "fileName", "Please provide filename");
             //await context.Response.WriteAsync(fileName);
