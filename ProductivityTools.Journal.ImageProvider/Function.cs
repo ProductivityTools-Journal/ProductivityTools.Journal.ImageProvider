@@ -36,7 +36,7 @@ namespace ProductivityTools.Journal.ImageProvider
         {
             if (FirebaseAuth.DefaultInstance == null)
             {
-                FirebaseApp.Create();
+                FirebaseApp.Create(ProjectId);
             }
             FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
             string uid = decodedToken.Uid;
