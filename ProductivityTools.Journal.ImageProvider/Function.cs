@@ -17,16 +17,19 @@ namespace ProductivityTools.Journal.ImageProvider
 {
     public class Function : IHttpFunction
     {
-    
+        const string ProjectId = "ptjournal-b53b0";
         static FirebaseAuth fierbaseApp = null;
         static Function()
         {
-            
-            FirebaseApp.Create();         
-            fierbaseApp = FirebaseAuth.DefaultInstance;
+            //FirebaseApp.GetInstance("ptjournal-b53b0");
+            if (FirebaseApp.DefaultInstance == null)
+            {
+                FirebaseApp.Create();
+                fierbaseApp = FirebaseAuth.DefaultInstance;
+            }
         }
 
-        const string ProjectId = "ptjournal-b53b0";
+        
 
         private string GetValue(HttpContext context, string key, string throwMessage)
         {
