@@ -17,7 +17,7 @@ namespace ProductivityTools.Journal.ImageProvider
 {
     public class Function : IHttpFunction
     {
-        const string ProjectId =;
+        const string ProjectId = "ptjournal-b53b0";
         static FirebaseAuth fierbaseApp = null;
         static Function()
         {
