@@ -17,6 +17,14 @@ namespace ProductivityTools.Journal.ImageProvider
 {
     public class Function : IHttpFunction
     {
+    
+        static FirebaseAuth fierbaseApp = null;
+        static Function()
+        {
+            
+            FirebaseApp.Create();         
+            fierbaseApp = FirebaseAuth.DefaultInstance;
+        }
 
         const string ProjectId = "ptjournal-b53b0";
 
@@ -32,13 +40,16 @@ namespace ProductivityTools.Journal.ImageProvider
             return value;
         }
 
+        
+
         private async Task<string> ValidateBearer(string idToken)
         {
-            if (FirebaseAuth.DefaultInstance == null)
+           
+            if (fierbaseApp == null)
             {
-                FirebaseApp.Create(ProjectId);
+                throw new Exception("firebase default instance is empty");
             }
-            FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
+            FirebaseToken decodedToken = await fierbaseApp.VerifyIdTokenAsync(idToken);
             string uid = decodedToken.Uid;
             if (decodedToken.Claims.ContainsKey("email"))
             {
