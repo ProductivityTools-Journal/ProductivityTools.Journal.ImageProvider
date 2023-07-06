@@ -24,8 +24,8 @@ namespace ProductivityTools.Journal.ImageProvider
             //FirebaseApp.GetInstance("ptjournal-b53b0");
             if (FirebaseApp.DefaultInstance == null)
             {
-                FirebaseApp.Create("ptjournal-b53b0");
-                fierbaseApp = FirebaseAuth.DefaultInstance;
+                var app=FirebaseApp.Create("ptjournal-b53b0");
+                fierbaseApp = FirebaseAuth.GetAuth(app);
             }
         }
 
