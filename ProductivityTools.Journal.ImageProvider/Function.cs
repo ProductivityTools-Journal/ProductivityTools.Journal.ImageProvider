@@ -47,7 +47,11 @@ namespace ProductivityTools.Journal.ImageProvider
 
         private async Task<string> ValidateBearer(string idToken)
         {
-           
+            if (fierbaseApp == null)
+            {
+                var app = FirebaseApp.Create("ptjournal-b53b0");
+                fierbaseApp = FirebaseAuth.GetAuth(app);
+            }
             if (fierbaseApp == null)
             {
                 throw new Exception("firebase default instance is empty");
