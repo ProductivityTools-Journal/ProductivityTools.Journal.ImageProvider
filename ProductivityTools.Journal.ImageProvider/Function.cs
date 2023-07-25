@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using static Google.Rpc.Context.AttributeContext.Types;
 using FirebaseAdmin.Auth;
 using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 
 namespace ProductivityTools.Journal.ImageProvider
 {
@@ -24,7 +25,11 @@ namespace ProductivityTools.Journal.ImageProvider
             //FirebaseApp.GetInstance("ptjournal-b53b0");
             if (FirebaseApp.DefaultInstance == null)
             {
-                var app=FirebaseApp.Create("ptjournal-b53b0");
+              //  var app=FirebaseApp.Create("ptjournal-b53b0");
+                var app = FirebaseApp.Create(new AppOptions()
+                {
+                    Credential = GoogleCredential.GetApplicationDefault(),
+                });
                 fierbaseApp = FirebaseAuth.GetAuth(app);
             }
         }
