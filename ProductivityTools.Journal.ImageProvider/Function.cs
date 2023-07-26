@@ -54,7 +54,10 @@ namespace ProductivityTools.Journal.ImageProvider
         {
             if (fierbaseApp == null)
             {
-                var app = FirebaseApp.Create("ptjournal-b53b0");
+                var app = FirebaseApp.Create(new AppOptions()
+                {
+                    Credential = GoogleCredential.GetApplicationDefault(),
+                });
                 fierbaseApp = FirebaseAuth.GetAuth(app);
             }
             if (fierbaseApp == null)
