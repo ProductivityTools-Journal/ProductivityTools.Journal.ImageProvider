@@ -13,6 +13,7 @@ using static Google.Rpc.Context.AttributeContext.Types;
 using FirebaseAdmin.Auth;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.Extensions.Primitives;
 
 namespace ProductivityTools.Journal.ImageProvider
 {
@@ -20,21 +21,7 @@ namespace ProductivityTools.Journal.ImageProvider
     {
         const string ProjectId = "ptjournal-b53b0";
         static FirebaseAuth fierbaseApp = null;
-        static Function()
-        {
-            //FirebaseApp.GetInstance("ptjournal-b53b0");
-            if (FirebaseApp.DefaultInstance == null)
-            {
-              //  var app=FirebaseApp.Create("ptjournal-b53b0");
-                var app = FirebaseApp.Create(new AppOptions()
-                {
-                    Credential = GoogleCredential.GetApplicationDefault(),
-                });
-                fierbaseApp = FirebaseAuth.GetAuth(app);
-            }
-        }
-
-        
+       
 
         private string GetValue(HttpContext context, string key, string throwMessage)
         {
@@ -82,8 +69,9 @@ namespace ProductivityTools.Journal.ImageProvider
         public async Task HandleAsync(HttpContext context)
         {
             var cookies = context.Request.Cookies;
-            string bearer = "blablabla";
-            string userEmail = await ValidateBearer(bearer);
+            StringValues bearer = string.Empty;
+            context.Request.Query.TryGetValue("bearer",out bearer);
+            string userEmail = await ValidateBearer(bearer[0]);
             return;
             //cookies.TryGetValue("token", out bearer);
             //string userEmail = "pwujczyk@gmail.com";//
