@@ -43,6 +43,8 @@ namespace ProductivityTools.Journal.ImageProvider
             if (fierbaseApp == null)
             {
                 var app = FirebaseApp.Create();
+                Console.WriteLine($"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  {app.Name}");
+                Console.WriteLine($"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  {app.Options.ProjectId}");
                 fierbaseApp = FirebaseAuth.GetAuth(app);
             }
             if (fierbaseApp == null)
