@@ -68,10 +68,10 @@ namespace ProductivityTools.Journal.ImageProvider
 
         public async Task HandleAsync(HttpContext context)
         {
-            var cookies = context.Request.Cookies;
-            StringValues bearer = string.Empty;
-            context.Request.Query.TryGetValue("bearer",out bearer);
-            string userEmail = await ValidateBearer(bearer[0]);
+            //var cookies = context.Request.Cookies;
+            //StringValues bearer = string.Empty;
+            //context.Request.Query.TryGetValue("bearer",out bearer);
+            string userEmail = await ValidateBearer("fdsa");
             return;
             //cookies.TryGetValue("token", out bearer);
             //string userEmail = "pwujczyk@gmail.com";//
