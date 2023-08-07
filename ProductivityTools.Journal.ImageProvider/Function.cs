@@ -14,12 +14,13 @@ using FirebaseAdmin.Auth;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.Extensions.Primitives;
-
+//https://us-central1-ptjournal-b53b0.cloudfunctions.net/CloudBuildFunction/?bearer=eyJhbGciOiJSUzI1NiIsImtp
+//http://127.0.0.1:8080/?bearer=eyJhbGciOiJSUzI1NiIsImtpZCI6IjYyM2YzNmM4MTZlZTNkZWQ2YzU0NTkyZTM4ZGFlZjcyZjE1YTBmMTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiUGF3ZWwgV3VqY3p5ayIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQVRYQUp4eVl0dXdzTTQtZDM0b2xWWi1MdDNkc2RmcGZONm01VXJMNlMtQT1zOTYtYyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9wdGpvdXJuYWwtYjUzYjAiLCJhdWQiOiJwdGpvdXJuYWwtYjUzYjAiLCJhdXRoX3RpbWUiOjE2OTEzMzMxNDgsInVzZXJfaWQiOiJvY1RGd21lMEFxWXd4ckpzeXlOb0haWk9zYzgzIiwic3ViIjoib2NURndtZTBBcVl3eHJKc3l5Tm9IWlpPc2M4MyIsImlhdCI6MTY5MTM0OTk2NiwiZXhwIjoxNjkxMzUzNTY2LCJlbWFpbCI6InB3dWpjenlrQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTAzNDE5MjE5NTI1NDQ4MDczODg1Il0sImVtYWlsIjpbInB3dWpjenlrQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.Jj518I6ARKpCHt3uIr53hdN2fYeFq1dLGzpeXjFvvHIobjaJzCPrUWbPj-4R5ZJ1EZljOInlPZMkmqi_Yq2G788-BnphnwPCNseMsWJNkgdrAlAXYCTRdrBD4MSZZhBGRz-eQx1uoshjqWXDW0i32OkFiuFiiQGOXhH0DnH3DhmMtexi-EjdV9lhwWhoxTS6Ler_IiPaLNNH09Pt9xeCfO5A9DwW4L4QSM4ZPghCSSUHfkWyL4mHW-YDKaKFKk7NnYrctNXX1d586pwPtkdB7phio2I5QtbdzUHsOwVExkBTs6tVh3nLS37dz8AhiGk5cTR7F-z_YtaLwB-6urQmtQ
 namespace ProductivityTools.Journal.ImageProvider
 {
     public class Function : IHttpFunction
     {
-        const string ProjectId = "ptjournal-b53b0";
+        //const string ProjectId = "ptjournal-b53b0";
         static FirebaseAuth fierbaseApp = null;
        
 
@@ -41,17 +42,14 @@ namespace ProductivityTools.Journal.ImageProvider
         {
             if (fierbaseApp == null)
             {
-                var app = FirebaseApp.Create(new AppOptions()
-                {
-                    Credential = GoogleCredential.GetApplicationDefault(),
-                });
+                var app = FirebaseApp.Create();
                 fierbaseApp = FirebaseAuth.GetAuth(app);
             }
             if (fierbaseApp == null)
             {
                 throw new Exception("firebase default instance is empty");
             }
-            FirebaseToken decodedToken = await fierbaseApp.VerifyIdTokenAsync(idToken);
+            FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
             string uid = decodedToken.Uid;
             if (decodedToken.Claims.ContainsKey("email"))
             {
