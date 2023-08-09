@@ -54,8 +54,8 @@ namespace ProductivityTools.Journal.ImageProvider
             {
                 throw new Exception("firebase default instance is empty");
             }
-            var decodedToken = await fierbaseApp.VerifyIdTokenAsync(idToken);
-            //FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
+           // var decodedToken = await fierbaseApp.VerifyIdTokenAsync(idToken);
+            FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
             string uid = decodedToken.Uid;
             if (decodedToken.Claims.ContainsKey("email"))
             {
