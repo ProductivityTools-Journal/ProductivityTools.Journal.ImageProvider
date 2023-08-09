@@ -45,7 +45,7 @@ namespace ProductivityTools.Journal.ImageProvider
                 var app = FirebaseApp.Create(new AppOptions()
                 {
                     Credential = GoogleCredential.GetApplicationDefault(),
-                    ServiceAccountId= "firebase-adminsdk-mfrie@ptjournal-b53b0.iam.gserviceaccount.com"
+                    ProjectId= "ptjournal-b53b0"
                 });
                 fierbaseApp = FirebaseAuth.GetAuth(app);
                 Console.WriteLine($"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  {app.Name}");
