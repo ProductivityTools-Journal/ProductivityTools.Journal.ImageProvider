@@ -42,10 +42,12 @@ namespace ProductivityTools.Journal.ImageProvider
         {
             if (fierbaseApp == null)
             {
-                var app = FirebaseApp.Create();
+                var app = FirebaseApp.Create(new AppOptions()
+                {
+                    Credential = GoogleCredential.GetApplicationDefault(),
+                });
                 Console.WriteLine($"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  {app.Name}");
                 Console.WriteLine($"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  {app.Options.ProjectId}");
-                fierbaseApp = FirebaseAuth.GetAuth(app);
             }
             if (fierbaseApp == null)
             {
@@ -68,9 +70,9 @@ namespace ProductivityTools.Journal.ImageProvider
 
         public async Task HandleAsync(HttpContext context)
         {
-            //var cookies = context.Request.Cookies;
-            //StringValues bearer = string.Empty;
-            //context.Request.Query.TryGetValue("bearer",out bearer);
+            ////var cookies = context.Request.Cookies;
+            ////StringValues bearer = string.Empty;
+            ////context.Request.Query.TryGetValue("bearer",out bearer);
             string userEmail = await ValidateBearer("fdsa");
             return;
             //cookies.TryGetValue("token", out bearer);
