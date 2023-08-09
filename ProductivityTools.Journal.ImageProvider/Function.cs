@@ -46,6 +46,7 @@ namespace ProductivityTools.Journal.ImageProvider
                 {
                     Credential = GoogleCredential.GetApplicationDefault(),
                 });
+                fierbaseApp = FirebaseAuth.GetAuth(app);
                 Console.WriteLine($"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  {app.Name}");
                 Console.WriteLine($"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  {app.Options.ProjectId}");
             }
@@ -53,7 +54,8 @@ namespace ProductivityTools.Journal.ImageProvider
             {
                 throw new Exception("firebase default instance is empty");
             }
-            FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
+            var decodedToken = await fierbaseApp.VerifyIdTokenAsync(idToken);
+            //FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
             string uid = decodedToken.Uid;
             if (decodedToken.Claims.ContainsKey("email"))
             {
