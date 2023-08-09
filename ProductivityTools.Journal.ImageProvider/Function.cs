@@ -45,6 +45,7 @@ namespace ProductivityTools.Journal.ImageProvider
                 var app = FirebaseApp.Create(new AppOptions()
                 {
                     Credential = GoogleCredential.GetApplicationDefault(),
+                    ServiceAccountId= "firebase-adminsdk-mfrie@ptjournal-b53b0.iam.gserviceaccount.com"
                 });
                 fierbaseApp = FirebaseAuth.GetAuth(app);
                 Console.WriteLine($"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  {app.Name}");
@@ -54,8 +55,8 @@ namespace ProductivityTools.Journal.ImageProvider
             {
                 throw new Exception("firebase default instance is empty");
             }
-           // var decodedToken = await fierbaseApp.VerifyIdTokenAsync(idToken);
-            FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
+            var decodedToken = await fierbaseApp.VerifyIdTokenAsync(idToken);
+           // FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
             string uid = decodedToken.Uid;
             if (decodedToken.Claims.ContainsKey("email"))
             {
