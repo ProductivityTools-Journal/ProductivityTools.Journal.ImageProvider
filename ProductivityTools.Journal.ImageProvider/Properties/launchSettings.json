@@ -1,10 +1,10 @@
-//{
-//  "profiles": {
-//    "ProductivityTools.Journal.ImageProvider": {
-//      "commandName": "Project",
-//      "environmentVariables": {
-//        "GOOGLE_APPLICATION_CREDENTIALS": "D:\\Bitbucket\\all.configuration\\ptjournal-serviceaccount.json"
-//      }
-//    }
-//  }
-//}
+{
+  "profiles": {
+    "ProductivityTools.Journal.ImageProvider": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "D:\\Bitbucket\\all.configuration\\ptjournal-serviceaccount.json"
+      }
+    }
+  }
+}
