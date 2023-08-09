@@ -22,11 +22,11 @@ namespace ProductivityTools.Journal.ImageProvider
     {
         //const string ProjectId = "ptjournal-b53b0";
         static FirebaseAuth fierbaseApp = null;
-       
+
 
         private string GetValue(HttpContext context, string key, string throwMessage)
         {
-            
+
             var keyExists = context.Request.Query.Keys.Contains(key);
             if (keyExists == false)
             {
@@ -36,7 +36,7 @@ namespace ProductivityTools.Journal.ImageProvider
             return value;
         }
 
-        
+
 
         private async Task<string> ValidateBearer(string idToken)
         {
@@ -45,7 +45,7 @@ namespace ProductivityTools.Journal.ImageProvider
                 var app = FirebaseApp.Create(new AppOptions()
                 {
                     Credential = GoogleCredential.GetApplicationDefault(),
-                    ProjectId= "ptjournal-b53b0"
+                    ProjectId = "ptjournal-b53b0"
                 });
                 fierbaseApp = FirebaseAuth.GetAuth(app);
                 Console.WriteLine($"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  {app.Name}");
@@ -56,7 +56,7 @@ namespace ProductivityTools.Journal.ImageProvider
                 throw new Exception("firebase default instance is empty");
             }
             var decodedToken = await fierbaseApp.VerifyIdTokenAsync(idToken);
-           // FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
+            // FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
             string uid = decodedToken.Uid;
             if (decodedToken.Claims.ContainsKey("email"))
             {
@@ -69,15 +69,17 @@ namespace ProductivityTools.Journal.ImageProvider
             }
             throw new Exception("Some error but not sure what");
         }
-    
+
 
         public async Task HandleAsync(HttpContext context)
         {
-            ////var cookies = context.Request.Cookies;
-            ////StringValues bearer = string.Empty;
-            ////context.Request.Query.TryGetValue("bearer",out bearer);
-            string userEmail = await ValidateBearer("eyJhbGciOiJSUzI1NiIsImtpZCI6ImNmM2I1YWRhM2NhMzkxNTQ4ZDM1OTJiMzU5MjkyM2UzNjAxMmI5MTQiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiUGF3ZWwgV3VqY3p5ayIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQVRYQUp4eVl0dXdzTTQtZDM0b2xWWi1MdDNkc2RmcGZONm01VXJMNlMtQT1zOTYtYyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9wdGpvdXJuYWwtYjUzYjAiLCJhdWQiOiJwdGpvdXJuYWwtYjUzYjAiLCJhdXRoX3RpbWUiOjE2OTE0ODMwMjAsInVzZXJfaWQiOiJvY1RGd21lMEFxWXd4ckpzeXlOb0haWk9zYzgzIiwic3ViIjoib2NURndtZTBBcVl3eHJKc3l5Tm9IWlpPc2M4MyIsImlhdCI6MTY5MTYwNjg0NiwiZXhwIjoxNjkxNjEwNDQ2LCJlbWFpbCI6InB3dWpjenlrQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTAzNDE5MjE5NTI1NDQ4MDczODg1Il0sImVtYWlsIjpbInB3dWpjenlrQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.rmgzFALK7-HAqD82q9KM4Tlh4ZA6UZC_QstbgQccQyPSHT944EZKd5N_qc7fCQnUfQkW4oNxLozEFHzfzIWphNwfNAEGi8v_w74iagilGj8YOSNy1f58gJ-vbMvIyze3QUc1VJv-4HMUw7pMZCHjMYkKUdMqjDL8zIsk6VOTy6ldjKEvVaIJm0t5say6P1sW-rcaVTceSV6FHy471m2yzt9F1QtgeW00fjn1-elieroT5F8FNzf6RYP2UCQ33_wB9YDl1Jicu_Hr7wyJ6q7eqdxlZsnEywiebmwM8YpqM4Wz7EHoPWlaLq9U-VqrKFJTWedZ1gtDbacmGA9zRUnoVA");
+            var cookies = context.Request.Cookies;
+            StringValues bearer = string.Empty;
+            context.Request.Query.TryGetValue("bearer", out bearer);
+            string userEmail = await ValidateBearer(bearer);
             Console.Write(userEmail);
+            await context.Response.WriteAsync(userEmail);
+
             return;
             //cookies.TryGetValue("token", out bearer);
             //string userEmail = "pwujczyk@gmail.com";//
